@@ -1,0 +1,1413 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BP CLINIC - A Netflix da Harmonização Facial</title>
+
+    <!-- GOOGLE TAG MANAGER -->
+    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-KMJTXB7K');</script>
+
+    <!-- GOOGLE ADS -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=AW-11520068730"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'AW-11520068730');
+    </script>
+
+    <!-- META PIXEL -->
+    <script>
+    !function(f,b,e,v,n,t,s)
+    {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+    n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+    if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+    n.queue=[];t=b.createElement(e);t.async=!0;
+    t.src=v;s=b.getElementsByTagName(e)[0];
+    s.parentNode.insertBefore(t,s)}(window, document,'script',
+    'https://connect.facebook.net/en_US/fbevents.js');
+    fbq('init', '1218301469790402');
+    fbq('track', 'PageView');
+    </script>
+    <noscript><img height="1" width="1" style="display:none" alt=""
+    src="https://www.facebook.com/tr?id=1218301469790402&ev=PageView&noscript=1"></noscript>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --bg: #141414;
+            --surface: #181818;
+            --surface-2: #1f1f1f;
+            --surface-3: rgba(255,255,255,0.08);
+            --border-soft: rgba(255,255,255,0.10);
+            --border-strong: rgba(255,255,255,0.16);
+            --text: #ffffff;
+            --text-muted: #d2d2d2;
+            --text-soft: #b3b3b3;
+            --text-faint: #808080;
+            --brand: #E50914;
+            --success: #46d369;
+            --whatsapp: #25D366;
+            --shadow-sm: 0 4px 14px rgba(0,0,0,0.22);
+            --shadow-md: 0 10px 28px rgba(0,0,0,0.34);
+            --shadow-lg: 0 18px 48px rgba(0,0,0,0.46);
+            --radius-sm: 4px;
+            --radius-md: 8px;
+            --radius-lg: 14px;
+            --space-2: 0.5rem;
+            --space-3: 0.75rem;
+            --space-4: 1rem;
+            --space-5: 1.25rem;
+            --space-6: 1.5rem;
+            --space-8: 2rem;
+            --space-10: 2.5rem;
+            --space-12: 3rem;
+            --header-h: 76px;
+            --ease-standard: cubic-bezier(0.16, 1, 0.3, 1);
+            --ease-exit: cubic-bezier(0.4, 0, 1, 1);
+            --dur-micro: 160ms;
+            --dur-ui: 220ms;
+            --dur-panel: 320ms;
+            --dur-scene: 520ms;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        html {
+            scroll-behavior: smooth;
+            scroll-padding-top: calc(var(--header-h) + 16px);
+            -webkit-text-size-adjust: 100%;
+        }
+
+        body {
+            min-height: 100vh;
+            overflow-x: hidden;
+            background:
+                radial-gradient(circle at top, rgba(229,9,20,0.08), transparent 28%),
+                var(--bg);
+            color: var(--text);
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            text-rendering: optimizeLegibility;
+        }
+
+        img {
+            display: block;
+            max-width: 100%;
+            height: auto;
+        }
+
+        button, a {
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        a {
+            color: inherit;
+            text-decoration: none;
+        }
+
+        button {
+            border: 0;
+            background: none;
+            font: inherit;
+            color: inherit;
+            cursor: pointer;
+        }
+
+        :focus-visible {
+            outline: 2px solid rgba(255,255,255,0.92);
+            outline-offset: 3px;
+            border-radius: 6px;
+        }
+
+        .skip-link {
+            position: absolute;
+            top: -44px;
+            left: 12px;
+            z-index: 1000;
+            padding: 10px 14px;
+            background: #fff;
+            color: #000;
+            border-radius: 8px;
+            transition: top var(--dur-ui) var(--ease-standard);
+        }
+
+        .skip-link:focus {
+            top: 12px;
+        }
+
+        .page-shell {
+            position: relative;
+        }
+
+        .header {
+            position: fixed;
+            inset: 0 0 auto 0;
+            height: var(--header-h);
+            padding: 16px 4vw;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            z-index: 120;
+            background:
+                linear-gradient(180deg, rgba(20,20,20,0.92) 0%, rgba(20,20,20,0.58) 58%, rgba(20,20,20,0) 100%);
+            transition:
+                background-color var(--dur-panel) var(--ease-standard),
+                backdrop-filter var(--dur-panel) var(--ease-standard),
+                border-color var(--dur-panel) var(--ease-standard),
+                transform var(--dur-panel) var(--ease-standard);
+            border-bottom: 1px solid transparent;
+        }
+
+        .header.scrolled {
+            background: rgba(20,20,20,0.82);
+            backdrop-filter: blur(14px) saturate(125%);
+            border-bottom-color: rgba(255,255,255,0.08);
+        }
+
+        .logo {
+            font-size: clamp(1.25rem, 1rem + 1.4vw, 1.75rem);
+            font-weight: 900;
+            letter-spacing: -0.06em;
+            text-transform: uppercase;
+            color: var(--brand);
+            line-height: 1;
+        }
+
+        .header-icons {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .icon-btn {
+            width: 44px;
+            height: 44px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 999px;
+            color: var(--text);
+            font-size: 1.25rem;
+            background: transparent;
+            transition:
+                background-color var(--dur-ui) var(--ease-standard),
+                transform var(--dur-micro) var(--ease-standard),
+                opacity var(--dur-micro) var(--ease-standard);
+        }
+
+        .icon-btn:hover {
+            background: rgba(255,255,255,0.08);
+        }
+
+        .icon-btn:active {
+            transform: scale(0.95);
+            opacity: 0.8;
+        }
+
+        main {
+            display: block;
+        }
+
+        .hero {
+            position: relative;
+            min-height: max(620px, 86vh);
+            overflow: clip;
+            isolation: isolate;
+        }
+
+        .hero-media {
+            position: absolute;
+            inset: 0;
+        }
+
+        .hero-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center 20%;
+            transform: scale(1.02);
+            filter: saturate(0.96) contrast(1.03);
+            transition: transform 1200ms var(--ease-standard), filter 900ms var(--ease-standard);
+            will-change: transform;
+        }
+
+        .hero-gradient {
+            position: absolute;
+            inset: 0;
+            background:
+                radial-gradient(ellipse at center, transparent 0%, rgba(20,20,20,0.34) 52%, rgba(20,20,20,0.92) 100%),
+                linear-gradient(to top, rgba(20,20,20,1) 0%, rgba(20,20,20,0.86) 22%, rgba(20,20,20,0.25) 54%, transparent 72%),
+                linear-gradient(to bottom, rgba(20,20,20,0.68) 0%, rgba(20,20,20,0.18) 28%, transparent 40%);
+            z-index: 1;
+        }
+
+        .hero-noise {
+            position: absolute;
+            inset: 0;
+            background-image:
+                linear-gradient(rgba(255,255,255,0.02), rgba(255,255,255,0.02));
+            mix-blend-mode: soft-light;
+            opacity: 0.45;
+            z-index: 2;
+            pointer-events: none;
+        }
+
+        .hero-content {
+            position: absolute;
+            left: 4vw;
+            right: 4vw;
+            bottom: clamp(84px, 10vh, 128px);
+            z-index: 5;
+            max-width: 560px;
+        }
+
+        .hero-metadata,
+        .hero-title,
+        .hero-tags,
+        .hero-description,
+        .hero-buttons {
+            opacity: 0;
+            transform: translateY(0);
+            animation: heroReveal var(--dur-scene) var(--ease-standard) forwards;
+        }
+
+        .hero-metadata { animation-delay: 90ms; }
+        .hero-title { animation-delay: 150ms; }
+        .hero-tags { animation-delay: 220ms; }
+        .hero-description { animation-delay: 280ms; }
+        .hero-buttons { animation-delay: 340ms; }
+
+        .hero-metadata {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin-bottom: 10px;
+            font-size: 12px;
+            font-weight: 700;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+            color: var(--success);
+        }
+
+        .hero-title {
+            margin-bottom: 12px;
+            font-size: clamp(2rem, 5vw, 3.6rem);
+            font-weight: 900;
+            line-height: 0.92;
+            letter-spacing: -0.06em;
+            text-shadow:
+                0 4px 20px rgba(0,0,0,0.45),
+                0 1px 2px rgba(0,0,0,0.6);
+        }
+
+        .hero-tags {
+            margin-bottom: 12px;
+            font-size: 14px;
+            font-weight: 500;
+            color: var(--text-muted);
+        }
+
+        .hero-description {
+            margin-bottom: 22px;
+            max-width: 46ch;
+            font-size: 15px;
+            line-height: 1.58;
+            color: #ededed;
+            text-shadow: 0 1px 8px rgba(0,0,0,0.55);
+        }
+
+        .hero-buttons {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+
+        .btn-primary,
+        .btn-secondary {
+            min-height: 48px;
+            padding: 12px 26px;
+            border-radius: var(--radius-sm);
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            font-size: 15px;
+            font-weight: 700;
+            letter-spacing: -0.01em;
+            transition:
+                background-color var(--dur-ui) var(--ease-standard),
+                color var(--dur-ui) var(--ease-standard),
+                box-shadow var(--dur-ui) var(--ease-standard),
+                transform var(--dur-ui) var(--ease-standard),
+                opacity var(--dur-ui) var(--ease-standard);
+            will-change: transform;
+        }
+
+        .btn-primary {
+            background: #fff;
+            color: #000;
+            box-shadow:
+                0 2px 12px rgba(0,0,0,0.28),
+                inset 0 1px 0 rgba(255,255,255,0.5);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-1px);
+            background: #f2f2f2;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.25);
+        }
+
+        .btn-primary:active {
+            transform: translateY(0) scale(0.975);
+            background: #e8e8e8;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.20);
+        }
+
+        .btn-secondary {
+            color: #fff;
+            background: rgba(109,109,110,0.52);
+            border: 1px solid rgba(255,255,255,0.1);
+            backdrop-filter: blur(10px) saturate(120%);
+        }
+
+        .btn-secondary:hover {
+            transform: translateY(-1px);
+            background: rgba(132,132,134,0.62);
+            box-shadow: 0 8px 18px rgba(0,0,0,0.22);
+        }
+
+        .btn-secondary:active {
+            transform: translateY(0) scale(0.975);
+            background: rgba(98,98,100,0.6);
+        }
+
+        .section-stack {
+            position: relative;
+            z-index: 2;
+            padding-bottom: 120px;
+            margin-top: -20px;
+        }
+
+        .category-section {
+            padding: 40px 0 24px 4vw;
+            opacity: 1;
+        }
+
+        .section-inner {
+            position: relative;
+        }
+
+        .category-title {
+            margin-bottom: 16px;
+            font-size: 20px;
+            font-weight: 700;
+            letter-spacing: -0.03em;
+            color: #e8e8e8;
+        }
+
+        .carousel {
+            display: flex;
+            gap: 8px;
+            overflow-x: auto;
+            overflow-y: hidden;
+            padding: 4px 4vw 16px 0;
+            scrollbar-width: none;
+            -ms-overflow-style: none;
+            scroll-behavior: smooth;
+            -webkit-overflow-scrolling: touch;
+            scroll-snap-type: x proximity;
+        }
+
+        .carousel::-webkit-scrollbar {
+            display: none;
+        }
+
+        .card,
+        .top10-card {
+            position: relative;
+            flex: 0 0 auto;
+            cursor: pointer;
+            scroll-snap-align: start;
+        }
+
+        .card {
+            min-width: 130px;
+            max-width: 130px;
+            overflow: hidden;
+            border-radius: 6px;
+            background: #111;
+            box-shadow: var(--shadow-sm);
+            transition:
+                transform var(--dur-panel) var(--ease-standard),
+                box-shadow var(--dur-panel) var(--ease-standard),
+                filter var(--dur-panel) var(--ease-standard);
+            transform-origin: center center;
+        }
+
+        .card::after {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to top, rgba(0,0,0,0.18), transparent 42%);
+            opacity: 0.75;
+            pointer-events: none;
+            transition: opacity var(--dur-ui) var(--ease-standard);
+        }
+
+        .card img {
+            width: 100%;
+            height: 195px;
+            object-fit: cover;
+            pointer-events: none;
+            transform: scale(1.001);
+            transition:
+                transform var(--dur-panel) var(--ease-standard),
+                filter var(--dur-panel) var(--ease-standard);
+        }
+
+        .card:active {
+            transform: scale(1.03);
+            box-shadow: var(--shadow-md);
+        }
+
+        .card-wide {
+            min-width: 280px;
+            max-width: 280px;
+        }
+
+        .card-wide img {
+            height: 158px;
+        }
+
+        .top10-card {
+            min-width: 180px;
+            max-width: 180px;
+            display: flex;
+            align-items: flex-end;
+            transition:
+                transform var(--dur-panel) var(--ease-standard),
+                filter var(--dur-panel) var(--ease-standard);
+        }
+
+        .top10-card:active {
+            transform: scale(1.02);
+        }
+
+        .top10-number {
+            position: absolute;
+            left: -20px;
+            bottom: -20px;
+            z-index: 1;
+            font-family: 'Inter', sans-serif;
+            font-size: 140px;
+            font-weight: 900;
+            line-height: 1;
+            color: transparent;
+            -webkit-text-stroke: 3px #3a3a3a;
+            text-stroke: 3px #3a3a3a;
+            transition: -webkit-text-stroke-color var(--dur-ui) var(--ease-standard);
+        }
+
+        .top10-image {
+            position: relative;
+            z-index: 2;
+            width: 100px;
+            height: 150px;
+            margin-left: 40px;
+            border-radius: 6px;
+            object-fit: cover;
+            box-shadow: 0 8px 18px rgba(0,0,0,0.42);
+            transition:
+                transform var(--dur-panel) var(--ease-standard),
+                box-shadow var(--dur-panel) var(--ease-standard);
+        }
+
+        .modal {
+            position: fixed;
+            inset: 0;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            padding: 24px;
+            background: rgba(0,0,0,0.84);
+            backdrop-filter: blur(8px) saturate(105%);
+            z-index: 220;
+            opacity: 0;
+        }
+
+        .modal.active {
+            display: flex;
+            animation: modalFadeIn 220ms var(--ease-standard) forwards;
+        }
+
+        .modal.is-closing {
+            display: flex;
+            animation: modalFadeOut 180ms var(--ease-exit) forwards;
+        }
+
+        .modal-content {
+            position: relative;
+            width: min(100%, 520px);
+            max-height: min(80vh, 760px);
+            overflow-y: auto;
+            padding: 32px 24px 24px;
+            border-radius: 12px;
+            background:
+                linear-gradient(180deg, rgba(255,255,255,0.02) 0%, rgba(255,255,255,0) 100%),
+                #181818;
+            border: 1px solid rgba(255,255,255,0.08);
+            box-shadow: var(--shadow-lg);
+            opacity: 0;
+            transform: translateY(18px) scale(0.985);
+            animation: modalPanelIn 360ms var(--ease-standard) forwards;
+        }
+
+        .modal.is-closing .modal-content {
+            animation: modalPanelOut 180ms var(--ease-exit) forwards;
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 14px;
+            right: 14px;
+            width: 40px;
+            height: 40px;
+            border-radius: 999px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(255,255,255,0.06);
+            color: white;
+            font-size: 24px;
+            transition:
+                background-color var(--dur-ui) var(--ease-standard),
+                transform var(--dur-micro) var(--ease-standard);
+        }
+
+        .modal-close:hover {
+            background: rgba(255,255,255,0.12);
+        }
+
+        .modal-close:active {
+            transform: scale(0.95);
+        }
+
+        .modal-title {
+            margin-bottom: 16px;
+            padding-right: 48px;
+            font-size: 24px;
+            font-weight: 700;
+            letter-spacing: -0.03em;
+            color: #fff;
+        }
+
+        .modal-text {
+            margin-bottom: 12px;
+            font-size: 15px;
+            line-height: 1.7;
+            color: var(--text-soft);
+        }
+
+        .modal-cta {
+            margin-top: 24px;
+            width: 100%;
+        }
+
+        .bottom-nav {
+            position: fixed;
+            inset: auto 0 0 0;
+            z-index: 110;
+            display: flex;
+            justify-content: space-around;
+            padding: 10px 0 calc(12px + env(safe-area-inset-bottom));
+            background: rgba(20,20,20,0.92);
+            backdrop-filter: blur(14px) saturate(120%);
+            border-top: 1px solid rgba(255,255,255,0.08);
+        }
+
+        .nav-item {
+            min-width: 72px;
+            min-height: 48px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 4px;
+            color: var(--text-faint);
+            font-size: 11px;
+            font-weight: 500;
+            transition:
+                color var(--dur-ui) var(--ease-standard),
+                transform var(--dur-micro) var(--ease-standard),
+                opacity var(--dur-micro) var(--ease-standard);
+        }
+
+        .nav-item.active,
+        .nav-item:hover {
+            color: #fff;
+        }
+
+        .nav-item:active {
+            transform: scale(0.96);
+        }
+
+        .nav-icon {
+            font-size: 22px;
+            line-height: 1;
+        }
+
+        .whatsapp-float {
+            position: fixed;
+            right: 20px;
+            bottom: 90px;
+            z-index: 105;
+            width: 60px;
+            height: 60px;
+            border-radius: 999px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, #25D366 0%, #1ea952 100%);
+            box-shadow: 0 10px 26px rgba(37, 211, 102, 0.30);
+            transition:
+                transform var(--dur-ui) var(--ease-standard),
+                box-shadow var(--dur-ui) var(--ease-standard),
+                filter var(--dur-ui) var(--ease-standard);
+        }
+
+        .whatsapp-float:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 16px 34px rgba(37, 211, 102, 0.28);
+            filter: saturate(1.02);
+        }
+
+        .whatsapp-float:active {
+            transform: scale(0.96);
+            box-shadow: 0 8px 18px rgba(37, 211, 102, 0.22);
+        }
+
+        .whatsapp-icon {
+            font-size: 32px;
+            color: #fff;
+            line-height: 1;
+        }
+
+        .reveal {
+            opacity: 1;
+        }
+
+        @supports (animation-timeline: view()) {
+            .reveal {
+                opacity: 0;
+                animation: sectionReveal linear both;
+                animation-timeline: view();
+                animation-range: entry 10% entry 40%;
+            }
+        }
+
+        @keyframes heroReveal {
+            from {
+                opacity: 0;
+                transform: translateY(14px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes modalFadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes modalFadeOut {
+            from { opacity: 1; }
+            to { opacity: 0; }
+        }
+
+        @keyframes modalPanelIn {
+            from {
+                opacity: 0;
+                transform: translateY(18px) scale(0.985);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+
+        @keyframes modalPanelOut {
+            from {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+            to {
+                opacity: 0;
+                transform: translateY(10px) scale(0.992);
+            }
+        }
+
+        @keyframes sectionReveal {
+            to { opacity: 1; }
+        }
+
+        @media (hover: hover) and (pointer: fine) {
+            .card:hover {
+                transform: translateY(-3px) scale(1.028);
+                box-shadow: var(--shadow-md);
+            }
+
+            .card:hover::after {
+                opacity: 0.5;
+            }
+
+            .card:hover img {
+                transform: scale(1.02);
+                filter: saturate(1.02);
+            }
+
+            .top10-card:hover {
+                transform: translateY(-2px);
+            }
+
+            .top10-card:hover .top10-image {
+                transform: translateY(-1px);
+                box-shadow: 0 14px 24px rgba(0,0,0,0.42);
+            }
+
+            .top10-card:hover .top10-number {
+                -webkit-text-stroke-color: #5a5a5a;
+                text-stroke-color: #5a5a5a;
+            }
+        }
+
+        @media (min-width: 768px) {
+            .header {
+                padding-inline: 60px;
+            }
+
+            .hero {
+                min-height: 88vh;
+            }
+
+            .hero-content {
+                left: 60px;
+                right: auto;
+                bottom: 15vh;
+            }
+
+            .hero-description {
+                font-size: 16px;
+            }
+
+            .section-stack {
+                padding-bottom: 56px;
+            }
+
+            .category-section {
+                padding: 48px 0 32px 60px;
+            }
+
+            .category-title {
+                font-size: 24px;
+            }
+
+            .carousel {
+                padding-right: 60px;
+            }
+
+            .card {
+                min-width: 180px;
+                max-width: 180px;
+            }
+
+            .card img {
+                height: 270px;
+            }
+
+            .card-wide {
+                min-width: 380px;
+                max-width: 380px;
+            }
+
+            .card-wide img {
+                height: 214px;
+            }
+
+            .bottom-nav {
+                display: none;
+            }
+
+            .whatsapp-float {
+                bottom: 30px;
+            }
+        }
+
+        @media (max-width: 420px) {
+            .hero {
+                min-height: 82vh;
+            }
+
+            .hero-content {
+                bottom: 104px;
+            }
+
+            .btn-primary,
+            .btn-secondary {
+                width: 100%;
+            }
+
+            .modal {
+                padding: 16px;
+            }
+
+            .modal-content {
+                padding: 28px 20px 20px;
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            html {
+                scroll-behavior: auto;
+            }
+
+            *, *::before, *::after {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+            }
+
+            .hero-image,
+            .hero-metadata,
+            .hero-title,
+            .hero-tags,
+            .hero-description,
+            .hero-buttons,
+            .modal-content,
+            .card,
+            .top10-card,
+            .whatsapp-float,
+            .icon-btn,
+            .btn-primary,
+            .btn-secondary {
+                transform: none !important;
+            }
+
+            .reveal {
+                opacity: 1 !important;
+                animation: none !important;
+            }
+        }
+    </style>
+</head>
+<body>
+    <a href="#conteudo" class="skip-link">Pular para o conteúdo</a>
+
+    <!-- Google Tag Manager (noscript) -->
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-KMJTXB7K"
+    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+
+    <div class="page-shell">
+        <header class="header" id="header">
+            <div class="logo">BP CLINIC</div>
+            <div class="header-icons">
+                <button class="icon-btn" type="button" aria-label="Buscar">🔍</button>
+            </div>
+        </header>
+
+        <main id="conteudo">
+            <section class="hero" aria-label="Destaque principal">
+                <div class="hero-media">
+                    <img
+                        src="https://media.atomicatpages.net/u/c4A73M1HtzULlEu4f8yQtIAWrdB3/Pictures/Ljhdbf6602891.jpeg"
+                        alt="Full Face: O Renascimento"
+                        class="hero-image"
+                        width="1440"
+                        height="1080"
+                        fetchpriority="high">
+                    <div class="hero-gradient"></div>
+                    <div class="hero-noise"></div>
+                </div>
+
+                <div class="hero-content">
+                    <div class="hero-metadata">
+                        <span>98% Relevância</span>
+                        <span>2024</span>
+                        <span>1 Sessão</span>
+                    </div>
+                    <h1 class="hero-title">FULL FACE:<br>O RENASCIMENTO</h1>
+                    <div class="hero-tags">Autoestima • Harmonização • Sem Cirurgia</div>
+                    <p class="hero-description">Baseado em fatos reais. Recupere a estrutura e jovialidade do seu rosto sem cirurgia.</p>
+                    <div class="hero-buttons">
+                        <a href="https://wa.me/5521973725889?text=Olá!%20Encontrei%20a%20BP%20Clinic%20pelo%20Google%20e%20gostaria%20de%20agendar%20minha%20avaliação%20Full%20Face"
+                           class="btn-primary"
+                           target="_blank" rel="noopener noreferrer"
+                           onclick="trackContact('Hero CTA - Full Face')">▶ INICIAR AVALIAÇÃO</a>
+
+                        <button class="btn-secondary" type="button" data-scroll-target="#procedures">ⓘ Ver Mais</button>
+                    </div>
+                </div>
+            </section>
+
+            <div class="section-stack">
+                <section class="category-section reveal" id="procedures">
+                    <div class="section-inner">
+                        <h2 class="category-title">Em Alta na BP Clinic</h2>
+                        <div class="carousel" aria-label="Procedimentos em alta">
+                            <button class="card" type="button" data-procedure="botox" aria-label="Abrir detalhes de Botox">
+                                <img src="https://media.atomicatpages.net/u/c4A73M1HtzULlEu4f8yQtIAWrdB3/Pictures/ceftcp5255127.jpeg" alt="Botox" width="360" height="540" loading="lazy">
+                            </button>
+                            <button class="card" type="button" data-procedure="labios" aria-label="Abrir detalhes de preenchimento labial">
+                                <img src="https://media.atomicatpages.net/u/c4A73M1HtzULlEu4f8yQtIAWrdB3/Pictures/iYRJto5255127.jpeg" alt="Lábios" width="360" height="540" loading="lazy">
+                            </button>
+                            <button class="card" type="button" data-procedure="olheiras" aria-label="Abrir detalhes de tratamento de olheiras">
+                                <img src="https://media.atomicatpages.net/u/c4A73M1HtzULlEu4f8yQtIAWrdB3/Pictures/EIRMBY5255127.jpeg" alt="Olheiras" width="360" height="540" loading="lazy">
+                            </button>
+                            <button class="card" type="button" data-procedure="rino" aria-label="Abrir detalhes de rinomodelação">
+                                <img src="https://media.atomicatpages.net/u/c4A73M1HtzULlEu4f8yQtIAWrdB3/Pictures/sDbBhL5255127.jpeg" alt="Rinomodelação" width="360" height="540" loading="lazy">
+                            </button>
+                            <button class="card" type="button" data-procedure="mento" aria-label="Abrir detalhes de mentoplastia">
+                                <img src="https://media.atomicatpages.net/u/c4A73M1HtzULlEu4f8yQtIAWrdB3/Pictures/EKIIib5255127.jpeg" alt="Mento" width="360" height="540" loading="lazy">
+                            </button>
+                        </div>
+                    </div>
+                </section>
+
+                <section class="category-section reveal">
+                    <div class="section-inner">
+                        <h2 class="category-title">Originais BP: Lifting Sem Cortes</h2>
+                        <div class="carousel" aria-label="Originais BP">
+                            <button class="card" type="button" data-procedure="fios" aria-label="Abrir detalhes de fios de sustentação">
+                                <img src="https://media.atomicatpages.net/u/c4A73M1HtzULlEu4f8yQtIAWrdB3/Pictures/MrFdiY5255127.jpeg" alt="Fios de Sustentação" width="360" height="540" loading="lazy">
+                            </button>
+                            <button class="card" type="button" data-procedure="bio" aria-label="Abrir detalhes de bioestimuladores">
+                                <img src="https://media.atomicatpages.net/u/c4A73M1HtzULlEu4f8yQtIAWrdB3/Pictures/HlIbtJ5255127.jpeg" alt="Bioestimuladores" width="360" height="540" loading="lazy">
+                            </button>
+                            <button class="card" type="button" data-procedure="tech" aria-label="Abrir detalhes de tecnologias avançadas">
+                                <img src="https://media.atomicatpages.net/u/c4A73M1HtzULlEu4f8yQtIAWrdB3/Pictures/EthEMl5255127.jpeg" alt="Tecnologias" width="360" height="540" loading="lazy">
+                            </button>
+                            <button class="card" type="button" data-procedure="pro" aria-label="Abrir detalhes da Dra. Bárbara Paixão">
+                                <img src="https://media.atomicatpages.net/u/c4A73M1HtzULlEu4f8yQtIAWrdB3/Pictures/JvWmgQ5255127.jpeg" alt="Profissional" width="360" height="540" loading="lazy">
+                            </button>
+                            <button class="card" type="button" data-procedure="clinic" aria-label="Abrir detalhes da BP Clinic">
+                                <img src="https://media.atomicatpages.net/u/c4A73M1HtzULlEu4f8yQtIAWrdB3/Pictures/eqgtSu5255127.jpeg" alt="BP Clinic" width="360" height="540" loading="lazy">
+                            </button>
+                        </div>
+                    </div>
+                </section>
+
+                <section class="category-section reveal">
+                    <div class="section-inner">
+                        <h2 class="category-title">Baseado em Histórias Reais</h2>
+                        <div class="carousel" aria-label="Histórias reais">
+                            <div class="card card-wide" role="img" aria-label="Transformação 1">
+                                <img src="https://media.atomicatpages.net/u/c4A73M1HtzULlEu4f8yQtIAWrdB3/Pictures/KjumcR5255127.jpeg" alt="Transformação 1" width="760" height="428" loading="lazy">
+                            </div>
+                            <div class="card card-wide" role="img" aria-label="Transformação 2">
+                                <img src="https://media.atomicatpages.net/u/c4A73M1HtzULlEu4f8yQtIAWrdB3/Pictures/keDHyk5255127.jpeg" alt="Transformação 2" width="760" height="428" loading="lazy">
+                            </div>
+                            <div class="card card-wide" role="img" aria-label="Transformação 3">
+                                <img src="https://media.atomicatpages.net/u/c4A73M1HtzULlEu4f8yQtIAWrdB3/Pictures/ByYQhp5255127.jpeg" alt="Transformação 3" width="760" height="428" loading="lazy">
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <section class="category-section reveal">
+                    <div class="section-inner">
+                        <h2 class="category-title">Top 10 Dúvidas no Brasil Hoje</h2>
+                        <div class="carousel" aria-label="Dúvidas frequentes">
+                            <button class="top10-card" type="button" data-modal-id="modal1" aria-label="Abrir dúvida número 1">
+                                <div class="top10-number">1</div>
+                                <img src="https://media.atomicatpages.net/u/c4A73M1HtzULlEu4f8yQtIAWrdB3/Pictures/yXcrBb5255127.jpeg" alt="Dói?" class="top10-image" width="200" height="300" loading="lazy">
+                            </button>
+                            <button class="top10-card" type="button" data-modal-id="modal2" aria-label="Abrir dúvida número 2">
+                                <div class="top10-number">2</div>
+                                <img src="https://media.atomicatpages.net/u/c4A73M1HtzULlEu4f8yQtIAWrdB3/Pictures/aadCId5255127.jpeg" alt="Tempo de Recuperação" class="top10-image" width="200" height="300" loading="lazy">
+                            </button>
+                            <button class="top10-card" type="button" data-modal-id="modal3" aria-label="Abrir dúvida número 3">
+                                <div class="top10-number">3</div>
+                                <img src="https://media.atomicatpages.net/u/c4A73M1HtzULlEu4f8yQtIAWrdB3/Pictures/yHqBtP8016468.png" alt="Quanto Dura?" class="top10-image" width="200" height="300" loading="lazy">
+                            </button>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </main>
+
+        <div class="modal" id="modal1" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="modal1-title">
+            <div class="modal-content">
+                <button class="modal-close" type="button" aria-label="Fechar modal" data-close-modal>×</button>
+                <h3 class="modal-title" id="modal1-title">DÓI MUITO?</h3>
+                <p class="modal-text">Spoiler: Não. Utilizamos anestesia infiltrativa no local da aplicação e técnicas minimamente invasivas. A maioria dos pacientes relata apenas um leve desconforto momentâneo. Sua experiência será completamente personalizada para seu nível de sensibilidade.</p>
+            </div>
+        </div>
+
+        <div class="modal" id="modal2" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="modal2-title">
+            <div class="modal-content">
+                <button class="modal-close" type="button" aria-label="Fechar modal" data-close-modal>×</button>
+                <h3 class="modal-title" id="modal2-title">TEMPO DE RECUPERAÇÃO</h3>
+                <p class="modal-text">Vida normal imediata. Você sai pronta para suas atividades do dia. Pode haver um leve inchaço que desaparece em 24-48h. A maioria das pacientes volta ao trabalho no mesmo dia. Maquiagem pode ser aplicada após 24 horas.</p>
+            </div>
+        </div>
+
+        <div class="modal" id="modal3" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="modal3-title">
+            <div class="modal-content">
+                <button class="modal-close" type="button" aria-label="Fechar modal" data-close-modal>×</button>
+                <h3 class="modal-title" id="modal3-title">QUANTO DURA?</h3>
+                <p class="modal-text">Uma temporada longa. Resultados de 12 a 18 meses dependendo do procedimento e metabolismo individual. Botox dura 4-6 meses. Preenchimentos de 12-18 meses. Bioestimuladores até 24 meses. Investimento que valoriza sua autoestima por muito tempo.</p>
+            </div>
+        </div>
+
+        <div class="modal" id="proc-botox" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="proc-botox-title">
+            <div class="modal-content">
+                <button class="modal-close" type="button" aria-label="Fechar modal" data-close-modal>×</button>
+                <h3 class="modal-title" id="proc-botox-title">BOTOX</h3>
+                <p class="modal-text">A toxina botulínica é o tratamento mais procurado para suavizar rugas de expressão. Ideal para testa, glabela e pés de galinha.</p>
+                <p class="modal-text"><strong>Duração:</strong> 4-6 meses<br><strong>Tempo de aplicação:</strong> 15 minutos<br><strong>Resultado visível:</strong> 3-7 dias</p>
+                <a href="https://wa.me/5521973725889?text=Olá!%20Vi%20a%20BP%20Clinic%20no%20Google%20e%20quero%20saber%20mais%20sobre%20Botox"
+                   class="btn-primary modal-cta"
+                   target="_blank" rel="noopener noreferrer"
+                   onclick="trackContact('Modal - Botox')">💬 Agendar Avaliação</a>
+            </div>
+        </div>
+
+        <div class="modal" id="proc-labios" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="proc-labios-title">
+            <div class="modal-content">
+                <button class="modal-close" type="button" aria-label="Fechar modal" data-close-modal>×</button>
+                <h3 class="modal-title" id="proc-labios-title">PREENCHIMENTO LABIAL</h3>
+                <p class="modal-text">Técnica que devolve volume, contorno e hidratação aos lábios respeitando a harmonia facial. Resultado natural e personalizado.</p>
+                <p class="modal-text"><strong>Duração:</strong> 12-18 meses<br><strong>Tempo de aplicação:</strong> 30 minutos<br><strong>Resultado visível:</strong> Imediato</p>
+                <a href="https://wa.me/5521973725889?text=Olá!%20Vi%20a%20BP%20Clinic%20no%20Google%20e%20quero%20saber%20mais%20sobre%20Preenchimento%20Labial"
+                   class="btn-primary modal-cta"
+                   target="_blank" rel="noopener noreferrer"
+                   onclick="trackContact('Modal - Lábios')">💬 Agendar Avaliação</a>
+            </div>
+        </div>
+
+        <div class="modal" id="proc-olheiras" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="proc-olheiras-title">
+            <div class="modal-content">
+                <button class="modal-close" type="button" aria-label="Fechar modal" data-close-modal>×</button>
+                <h3 class="modal-title" id="proc-olheiras-title">TRATAMENTO DE OLHEIRAS</h3>
+                <p class="modal-text">Preenche o sulco e clareia a região, eliminando o aspecto cansado. Rejuvenesce o olhar de forma sutil e natural.</p>
+                <p class="modal-text"><strong>Duração:</strong> 12-18 meses<br><strong>Tempo de aplicação:</strong> 20 minutos<br><strong>Resultado visível:</strong> Imediato</p>
+                <a href="https://wa.me/5521973725889?text=Olá!%20Vi%20a%20BP%20Clinic%20no%20Google%20e%20quero%20saber%20mais%20sobre%20Tratamento%20de%20Olheiras"
+                   class="btn-primary modal-cta"
+                   target="_blank" rel="noopener noreferrer"
+                   onclick="trackContact('Modal - Olheiras')">💬 Agendar Avaliação</a>
+            </div>
+        </div>
+
+        <div class="modal" id="proc-rino" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="proc-rino-title">
+            <div class="modal-content">
+                <button class="modal-close" type="button" aria-label="Fechar modal" data-close-modal>×</button>
+                <h3 class="modal-title" id="proc-rino-title">RINOMODELAÇÃO</h3>
+                <p class="modal-text">Harmonização nasal sem cirurgia. Corrige pequenas imperfeições e melhora o contorno do nariz de forma reversível.</p>
+                <p class="modal-text"><strong>Duração:</strong> 12-18 meses<br><strong>Tempo de aplicação:</strong> 30 minutos<br><strong>Resultado visível:</strong> Imediato</p>
+                <a href="https://wa.me/5521973725889?text=Olá!%20Vi%20a%20BP%20Clinic%20no%20Google%20e%20quero%20saber%20mais%20sobre%20Rinomodelação"
+                   class="btn-primary modal-cta"
+                   target="_blank" rel="noopener noreferrer"
+                   onclick="trackContact('Modal - Rinomodelação')">💬 Agendar Avaliação</a>
+            </div>
+        </div>
+
+        <div class="modal" id="proc-mento" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="proc-mento-title">
+            <div class="modal-content">
+                <button class="modal-close" type="button" aria-label="Fechar modal" data-close-modal>×</button>
+                <h3 class="modal-title" id="proc-mento-title">MENTOPLASTIA (QUEIXO)</h3>
+                <p class="modal-text">Harmonização do queixo que melhora o perfil facial. Projeta e define o terço inferior do rosto criando equilíbrio facial.</p>
+                <p class="modal-text"><strong>Duração:</strong> 12-18 meses<br><strong>Tempo de aplicação:</strong> 30 minutos<br><strong>Resultado visível:</strong> Imediato</p>
+                <a href="https://wa.me/5521973725889?text=Olá!%20Vi%20a%20BP%20Clinic%20no%20Google%20e%20quero%20saber%20mais%20sobre%20Mentoplastia"
+                   class="btn-primary modal-cta"
+                   target="_blank" rel="noopener noreferrer"
+                   onclick="trackContact('Modal - Mento')">💬 Agendar Avaliação</a>
+            </div>
+        </div>
+
+        <div class="modal" id="proc-fios" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="proc-fios-title">
+            <div class="modal-content">
+                <button class="modal-close" type="button" aria-label="Fechar modal" data-close-modal>×</button>
+                <h3 class="modal-title" id="proc-fios-title">FIOS DE SUSTENTAÇÃO</h3>
+                <p class="modal-text">Lifting facial sem cirurgia. Reposiciona tecidos caídos e estimula produção de colágeno. Efeito lifting imediato e progressivo.</p>
+                <p class="modal-text"><strong>Duração:</strong> 18-24 meses<br><strong>Tempo de aplicação:</strong> 60 minutos<br><strong>Resultado visível:</strong> Imediato e melhora até 6 meses</p>
+                <a href="https://wa.me/5521973725889?text=Olá!%20Vi%20a%20BP%20Clinic%20no%20Google%20e%20quero%20saber%20mais%20sobre%20Fios%20de%20Sustentação"
+                   class="btn-primary modal-cta"
+                   target="_blank" rel="noopener noreferrer"
+                   onclick="trackContact('Modal - Fios')">💬 Agendar Avaliação</a>
+            </div>
+        </div>
+
+        <div class="modal" id="proc-bio" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="proc-bio-title">
+            <div class="modal-content">
+                <button class="modal-close" type="button" aria-label="Fechar modal" data-close-modal>×</button>
+                <h3 class="modal-title" id="proc-bio-title">BIOESTIMULADORES</h3>
+                <p class="modal-text">Estimula a produção natural de colágeno. Melhora a qualidade da pele, firmeza e elasticidade de forma gradual e duradoura.</p>
+                <p class="modal-text"><strong>Duração:</strong> 24 meses<br><strong>Sessões:</strong> 2-3 com intervalo de 30 dias<br><strong>Resultado visível:</strong> Progressivo (2-6 meses)</p>
+                <a href="https://wa.me/5521973725889?text=Olá!%20Vi%20a%20BP%20Clinic%20no%20Google%20e%20quero%20saber%20mais%20sobre%20Bioestimuladores"
+                   class="btn-primary modal-cta"
+                   target="_blank" rel="noopener noreferrer"
+                   onclick="trackContact('Modal - Bioestimuladores')">💬 Agendar Avaliação</a>
+            </div>
+        </div>
+
+        <div class="modal" id="proc-tech" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="proc-tech-title">
+            <div class="modal-content">
+                <button class="modal-close" type="button" aria-label="Fechar modal" data-close-modal>×</button>
+                <h3 class="modal-title" id="proc-tech-title">TECNOLOGIAS AVANÇADAS</h3>
+                <p class="modal-text">Lasers, radiofrequência e ultrassom microfocado. Tratamentos de última geração para rejuvenescimento e firmeza da pele.</p>
+                <p class="modal-text"><strong>Indicações:</strong> Flacidez, textura irregular, poros dilatados, manchas<br><strong>Sessões:</strong> Protocolo personalizado</p>
+                <a href="https://wa.me/5521973725889?text=Olá!%20Vi%20a%20BP%20Clinic%20no%20Google%20e%20quero%20saber%20mais%20sobre%20Tecnologias%20Avançadas"
+                   class="btn-primary modal-cta"
+                   target="_blank" rel="noopener noreferrer"
+                   onclick="trackContact('Modal - Tecnologias')">💬 Agendar Avaliação</a>
+            </div>
+        </div>
+
+        <div class="modal" id="proc-pro" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="proc-pro-title">
+            <div class="modal-content">
+                <button class="modal-close" type="button" aria-label="Fechar modal" data-close-modal>×</button>
+                <h3 class="modal-title" id="proc-pro-title">DRA. BÁRBARA PAIXÃO</h3>
+                <p class="modal-text">Cirurgiã-Dentista atuando em Harmonização Orofacial & Estética Dental Avançada.</p>
+                <p class="modal-text">Resultados seguros, previsíveis e naturais. São utilizadas técnicas avançadas de reestruturação facial, recontorno estético com ácido hialurônico e regeneração com bioestimulador de colágeno.</p>
+                <a href="https://wa.me/5521973725889?text=Olá!%20Encontrei%20a%20Dra.%20Bárbara%20no%20Google%20e%20gostaria%20de%20agendar%20uma%20avaliação"
+                   class="btn-primary modal-cta"
+                   target="_blank" rel="noopener noreferrer"
+                   onclick="trackContact('Modal - Profissional')">💬 Agendar Avaliação</a>
+            </div>
+        </div>
+
+        <div class="modal" id="proc-clinic" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="proc-clinic-title">
+            <div class="modal-content">
+                <button class="modal-close" type="button" aria-label="Fechar modal" data-close-modal>×</button>
+                <h3 class="modal-title" id="proc-clinic-title">BP CLINIC</h3>
+                <p class="modal-text">Clínica referência em harmonização facial no Rio de Janeiro. Ambiente acolhedor, equipamentos de última geração e protocolos personalizados.</p>
+                <p class="modal-text">Localização privilegiada com estacionamento próprio. Atendimento humanizado do agendamento ao pós-procedimento.</p>
+                <a href="https://wa.me/5521973725889?text=Olá!%20Encontrei%20a%20BP%20Clinic%20no%20Google%20e%20gostaria%20de%20conhecer%20a%20clínica"
+                   class="btn-primary modal-cta"
+                   target="_blank" rel="noopener noreferrer"
+                   onclick="trackContact('Modal - Clínica')">💬 Agendar Visita</a>
+            </div>
+        </div>
+
+        <nav class="bottom-nav" aria-label="Navegação principal mobile">
+            <a href="#" class="nav-item active">
+                <span class="nav-icon">🏠</span>
+                <span>Início</span>
+            </a>
+            <a href="#procedures" class="nav-item">
+                <span class="nav-icon">🎬</span>
+                <span>Procedimentos</span>
+            </a>
+            <a href="https://wa.me/5521973725889?text=Olá!%20Vi%20a%20BP%20Clinic%20no%20Google%20e%20quero%20mais%20informações"
+               class="nav-item"
+               target="_blank" rel="noopener noreferrer"
+               onclick="trackContact('Bottom Nav')">
+                <span class="nav-icon">💬</span>
+                <span>Contato</span>
+            </a>
+        </nav>
+
+        <a href="https://wa.me/5521973725889?text=Olá!%20Encontrei%20vocês%20pelo%20Google%20e%20gostaria%20de%20saber%20mais%20sobre%20os%20procedimentos"
+           class="whatsapp-float"
+           target="_blank" rel="noopener noreferrer"
+           aria-label="Falar no WhatsApp"
+           onclick="trackContact('WhatsApp Float')">
+            <span class="whatsapp-icon">💬</span>
+        </a>
+    </div>
+
+    <script>
+        var conversionSent = false;
+        var activeModal = null;
+        var lastFocusedElement = null;
+        var header = document.getElementById('header');
+        var prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+        function trackContact(buttonName) {
+            if (conversionSent) return;
+
+            gtag('event', 'conversion', {
+                'send_to': 'AW-11520068730/2dJwCIXhi4kbEPqYmfUq',
+                'value': 1.0,
+                'currency': 'BRL',
+                'event_label': buttonName
+            });
+
+            fbq('track', 'Contact', {
+                content_name: buttonName,
+                source: 'website'
+            });
+
+            fbq('track', 'Lead', {
+                content_name: buttonName,
+                source: 'website'
+            });
+
+            conversionSent = true;
+        }
+
+        function trackViewContent(procedureName) {
+            fbq('track', 'ViewContent', {
+                content_name: procedureName,
+                content_type: 'product'
+            });
+        }
+
+        var scrollTracked = false;
+        window.addEventListener('scroll', function() {
+            if (window.scrollY > 36) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+
+            if (!scrollTracked && window.scrollY > document.body.scrollHeight * 0.5) {
+                fbq('trackCustom', 'ScrollProfundo', { percentage: '50%' });
+                scrollTracked = true;
+            }
+        }, { passive: true });
+
+        function setBodyScrollLock(locked) {
+            document.body.style.overflow = locked ? 'hidden' : '';
+        }
+
+        function openModal(modalId) {
+            var modal = document.getElementById(modalId);
+            if (!modal) return;
+
+            if (activeModal && activeModal !== modal) {
+                closeModal(activeModal.id, true);
+            }
+
+            activeModal = modal;
+            lastFocusedElement = document.activeElement;
+            modal.classList.remove('is-closing');
+            modal.classList.add('active');
+            modal.setAttribute('aria-hidden', 'false');
+            setBodyScrollLock(true);
+
+            var closeButton = modal.querySelector('[data-close-modal]');
+            if (closeButton) closeButton.focus();
+
+            if (modalId.startsWith('modal')) {
+                fbq('trackCustom', 'AberturaDuvida', { modal: modalId });
+            }
+        }
+
+        function closeModal(modalId, immediate) {
+            var modal = typeof modalId === 'string' ? document.getElementById(modalId) : modalId;
+            if (!modal) return;
+
+            var finishClose = function() {
+                modal.classList.remove('active', 'is-closing');
+                modal.setAttribute('aria-hidden', 'true');
+                if (activeModal === modal) activeModal = null;
+                setBodyScrollLock(false);
+                if (lastFocusedElement) lastFocusedElement.focus();
+            };
+
+            if (immediate || prefersReducedMotion) {
+                finishClose();
+                return;
+            }
+
+            modal.classList.remove('active');
+            modal.classList.add('is-closing');
+            window.setTimeout(finishClose, 180);
+        }
+
+        function openProcedure(procId) {
+            openModal('proc-' + procId);
+
+            var procedureNames = {
+                botox: 'Botox',
+                labios: 'Preenchimento Labial',
+                olheiras: 'Tratamento de Olheiras',
+                rino: 'Rinomodelação',
+                mento: 'Mentoplastia',
+                fios: 'Fios de Sustentação',
+                bio: 'Bioestimuladores',
+                tech: 'Tecnologias Avançadas',
+                pro: 'Dra. Bárbara Paixão',
+                clinic: 'BP Clinic'
+            };
+
+            trackViewContent(procedureNames[procId] || procId);
+        }
+
+        document.querySelectorAll('[data-procedure]').forEach(function(card) {
+            card.addEventListener('click', function() {
+                openProcedure(this.dataset.procedure);
+            });
+        });
+
+        document.querySelectorAll('[data-modal-id]').forEach(function(card) {
+            card.addEventListener('click', function() {
+                openModal(this.dataset.modalId);
+            });
+        });
+
+        document.querySelectorAll('.modal').forEach(function(modal) {
+            modal.addEventListener('click', function(e) {
+                if (e.target === modal) {
+                    closeModal(modal.id);
+                }
+            });
+        });
+
+        document.querySelectorAll('[data-close-modal]').forEach(function(button) {
+            button.addEventListener('click', function() {
+                var modal = this.closest('.modal');
+                if (modal) closeModal(modal.id);
+            });
+        });
+
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape' && activeModal) {
+                closeModal(activeModal.id);
+            }
+        });
+
+        document.querySelectorAll('a[href^="#"], [data-scroll-target]').forEach(function(trigger) {
+            trigger.addEventListener('click', function(e) {
+                var selector = this.getAttribute('href') && this.getAttribute('href').startsWith('#')
+                    ? this.getAttribute('href')
+                    : this.dataset.scrollTarget;
+
+                if (!selector || selector === '#') return;
+
+                var target = document.querySelector(selector);
+                if (!target) return;
+
+                e.preventDefault();
+                target.scrollIntoView({
+                    behavior: prefersReducedMotion ? 'auto' : 'smooth',
+                    block: 'start'
+                });
+            });
+        });
+
+        setTimeout(function() {
+            fbq('trackCustom', 'TempoEngajamento', {
+                time: '5min'
+            });
+        }, 300000);
+    </script>
+</body>
+</html>
