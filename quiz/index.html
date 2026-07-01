@@ -1,0 +1,735 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>BP Clinic | Quiz de Harmonização Facial</title>
+
+<!-- GOOGLE TAG MANAGER -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','GTM-KMJTXB7K');</script>
+
+<!-- GOOGLE ADS -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=AW-11520068730"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'AW-11520068730');
+</script>
+
+<!-- Meta Pixel Code -->
+<script>
+!function(f,b,e,v,n,t,s)
+{if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+n.queue=[];t=b.createElement(e);t.async=!0;
+t.src=v;s=b.getElementsByTagName(e)[0];
+s.parentNode.insertBefore(t,s)}(window, document,'script',
+'https://connect.facebook.net/en_US/fbevents.js');
+fbq('init', '1524104342651723');
+fbq('track', 'PageView');
+</script>
+<noscript><img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=1524104342651723&ev=PageView&noscript=1" alt=""></noscript>
+<!-- End Meta Pixel Code -->
+
+<style>
+  :root {
+    --bg: #f7f5f3;
+    --surface: #ffffff;
+    --surface-soft: #fbf9f7;
+    --text: #1c1b1a;
+    --text-muted: #6e6b67;
+    --text-faint: #a6a29c;
+    --accent: #b8544a;
+    --accent-soft: #f1ded9;
+    --accent-strong: #9c3f37;
+    --border: rgba(28,27,26,0.08);
+    --shadow-sm: 0 1px 2px rgba(28,27,26,0.04), 0 2px 8px rgba(28,27,26,0.04);
+    --shadow-md: 0 8px 24px rgba(28,27,26,0.08);
+    --shadow-lg: 0 24px 60px rgba(28,27,26,0.14);
+    --radius-lg: 28px;
+    --radius-md: 18px;
+    --radius-sm: 12px;
+    --ease: cubic-bezier(0.16, 1, 0.3, 1);
+    --dur: 420ms;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
+
+  html { -webkit-text-size-adjust: 100%; }
+
+  body {
+    min-height: 100dvh;
+    background: var(--bg);
+    color: var(--text);
+    font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', 'Inter', system-ui, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+    overflow-x: hidden;
+  }
+
+  button { font: inherit; color: inherit; background: none; border: 0; cursor: pointer; }
+  :focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-radius: var(--radius-sm); }
+
+  .app {
+    min-height: 100dvh;
+    display: flex;
+    flex-direction: column;
+    max-width: 560px;
+    margin-inline: auto;
+    padding: max(20px, env(safe-area-inset-top)) 20px max(20px, env(safe-area-inset-bottom)) 20px;
+  }
+
+  .progress-wrap {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 28px;
+    min-height: 44px;
+  }
+
+  .back-btn {
+    width: 40px;
+    height: 40px;
+    flex: 0 0 auto;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 999px;
+    background: var(--surface);
+    box-shadow: var(--shadow-sm);
+    color: var(--text-muted);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity var(--dur) var(--ease), transform var(--dur) var(--ease);
+  }
+  .back-btn.visible { opacity: 1; pointer-events: auto; }
+  .back-btn:active { transform: scale(0.92); }
+
+  .progress-track {
+    flex: 1;
+    height: 6px;
+    border-radius: 999px;
+    background: var(--border);
+    overflow: hidden;
+  }
+
+  .progress-fill {
+    height: 100%;
+    border-radius: 999px;
+    background: var(--accent);
+    width: 0%;
+    transition: width 520ms var(--ease);
+  }
+
+  main {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+  }
+
+  .screen {
+    display: none;
+    flex-direction: column;
+    animation: screenIn var(--dur) var(--ease) forwards;
+  }
+  .screen.active { display: flex; }
+
+  @keyframes screenIn {
+    from { opacity: 0; transform: translateY(14px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    align-self: flex-start;
+    padding: 7px 14px;
+    margin-bottom: 20px;
+    background: var(--accent-soft);
+    color: var(--accent-strong);
+    border-radius: 999px;
+    font-size: 0.78rem;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+  }
+
+  .eyebrow-dot {
+    width: 6px; height: 6px; border-radius: 999px; background: var(--accent);
+  }
+
+  h1 {
+    font-size: clamp(1.7rem, 6vw, 2.3rem);
+    line-height: 1.18;
+    letter-spacing: -0.02em;
+    font-weight: 700;
+    margin-bottom: 12px;
+    max-width: 20ch;
+  }
+
+  .question-title {
+    font-size: clamp(1.4rem, 5.2vw, 1.9rem);
+    line-height: 1.22;
+    letter-spacing: -0.015em;
+    font-weight: 700;
+    margin-bottom: 8px;
+  }
+
+  .subtitle, .question-subtitle {
+    font-size: 1rem;
+    line-height: 1.5;
+    color: var(--text-muted);
+    margin-bottom: 28px;
+    max-width: 38ch;
+  }
+
+  .options {
+    display: grid;
+    gap: 12px;
+    margin-bottom: 8px;
+  }
+
+  .option {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    min-height: 64px;
+    padding: 16px 18px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-md);
+    text-align: left;
+    font-size: 1rem;
+    font-weight: 500;
+    color: var(--text);
+    box-shadow: var(--shadow-sm);
+    transition: transform 160ms var(--ease), box-shadow 160ms var(--ease), border-color 160ms var(--ease), background 160ms var(--ease);
+  }
+
+  .option:active { transform: scale(0.98); }
+
+  .option.selected {
+    border-color: var(--accent);
+    background: var(--accent-soft);
+    box-shadow: var(--shadow-md);
+  }
+
+  .option-icon {
+    width: 22px;
+    height: 22px;
+    flex: 0 0 auto;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 999px;
+    border: 1.5px solid var(--border);
+    color: transparent;
+    transition: background 160ms var(--ease), border-color 160ms var(--ease), color 160ms var(--ease);
+  }
+
+  .option.selected .option-icon {
+    background: var(--accent);
+    border-color: var(--accent);
+    color: #fff;
+  }
+
+  .option-text { flex: 1; }
+
+  footer {
+    margin-top: auto;
+    padding-top: 20px;
+  }
+
+  .primary-btn {
+    width: 100%;
+    min-height: 56px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: var(--radius-md);
+    background: var(--accent);
+    color: #fff;
+    font-size: 1.02rem;
+    font-weight: 600;
+    box-shadow: var(--shadow-md);
+    transition: transform 160ms var(--ease), box-shadow 160ms var(--ease), opacity 160ms var(--ease);
+  }
+  .primary-btn:disabled { opacity: 0.38; box-shadow: none; }
+  .primary-btn:not(:disabled):active { transform: scale(0.98); }
+
+  .ghost-note {
+    text-align: center;
+    margin-top: 14px;
+    font-size: 0.82rem;
+    color: var(--text-faint);
+  }
+
+  /* Welcome screen */
+  .welcome-visual {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 4/3;
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    margin-bottom: 24px;
+    box-shadow: var(--shadow-lg);
+  }
+  .welcome-visual img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .welcome-visual::after {
+    content: '';
+    position: absolute; inset: 0;
+    background: linear-gradient(180deg, rgba(0,0,0,0) 55%, rgba(0,0,0,0.28) 100%);
+  }
+
+  /* Loading screen */
+  .loading-screen {
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    flex: 1;
+    gap: 22px;
+  }
+
+  .spinner {
+    width: 46px;
+    height: 46px;
+    border-radius: 999px;
+    border: 3px solid var(--accent-soft);
+    border-top-color: var(--accent);
+    animation: spin 900ms linear infinite;
+  }
+  @keyframes spin { to { transform: rotate(360deg); } }
+
+  .loading-title {
+    font-size: 1.2rem;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+  }
+  .loading-sub {
+    font-size: 0.94rem;
+    color: var(--text-muted);
+    max-width: 30ch;
+  }
+
+  /* Result screen */
+  .result-badge {
+    align-self: center;
+    width: 88px; height: 88px;
+    border-radius: 999px;
+    background: var(--accent-soft);
+    display: flex; align-items: center; justify-content: center;
+    margin-bottom: 20px;
+    box-shadow: var(--shadow-md);
+  }
+
+  .result-title {
+    text-align: center;
+    font-size: clamp(1.5rem, 6vw, 2rem);
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    margin-bottom: 12px;
+  }
+
+  .result-sub {
+    text-align: center;
+    font-size: 1rem;
+    line-height: 1.55;
+    color: var(--text-muted);
+    max-width: 36ch;
+    margin: 0 auto 24px;
+  }
+
+  .result-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    padding: 20px 18px;
+    box-shadow: var(--shadow-md);
+    margin-bottom: 20px;
+  }
+
+  .result-row {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    padding: 10px 0;
+    border-bottom: 1px solid var(--border);
+  }
+  .result-row:last-child { border-bottom: none; }
+  .result-row-icon {
+    width: 20px; height: 20px; flex: 0 0 auto; color: var(--accent);
+  }
+  .result-row-text { font-size: 0.94rem; line-height: 1.45; color: var(--text); }
+
+  .result-disclaimer {
+    font-size: 0.8rem;
+    line-height: 1.45;
+    color: var(--text-faint);
+    text-align: center;
+    margin-top: 16px;
+  }
+
+  @media (min-width: 600px) {
+    .app { padding-top: 40px; padding-bottom: 40px; }
+    .question-title { font-size: 2rem; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+      animation-duration: 0.01ms !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
+</style>
+</head>
+<body>
+
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-KMJTXB7K" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+
+<div class="app">
+  <div class="progress-wrap" id="progressWrap" style="display:none;">
+    <button class="back-btn" id="backBtn" aria-label="Voltar para a pergunta anterior">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg>
+    </button>
+    <div class="progress-track"><div class="progress-fill" id="progressFill"></div></div>
+  </div>
+
+  <main id="quizMain">
+
+    <!-- Screen 0: Welcome -->
+    <section class="screen active" data-screen="welcome">
+      <div class="welcome-visual">
+        <img src="https://i.imgur.com/t0uZ7B1.jpg" alt="Paciente sorrindo após avaliação na BP Clinic" width="800" height="600" loading="eager">
+      </div>
+      <div class="eyebrow"><span class="eyebrow-dot"></span>BP Clinic · 2 minutos</div>
+      <h1>Como está sua relação com o espelho hoje?</h1>
+      <p class="subtitle">Um pequeno questionário para te ajudar a entender o que faria você se sentir mais confiante e bem com você mesma. Sem compromisso, só para se conhecer um pouco melhor.</p>
+      <footer>
+        <button class="primary-btn" id="startBtn">Responder agora</button>
+        <p class="ghost-note">Leva menos de 2 minutos</p>
+      </footer>
+    </section>
+
+    <!-- Screen 1 -->
+    <section class="screen" data-screen="q1">
+      <div class="eyebrow"><span class="eyebrow-dot"></span>Pergunta 1 de 5</div>
+      <h2 class="question-title">Quando você se olha no espelho, o que chama sua atenção primeiro?</h2>
+      <p class="question-subtitle">Pode escolher a opção que mais se parece com você hoje.</p>
+      <div class="options" data-question="q1">
+        <button class="option" data-value="testa">
+          <span class="option-icon"></span>
+          <span class="option-text">As linhas de expressão na testa</span>
+        </button>
+        <button class="option" data-value="contorno">
+          <span class="option-icon"></span>
+          <span class="option-text">O contorno do rosto, que parece menos definido</span>
+        </button>
+        <button class="option" data-value="olheiras">
+          <span class="option-icon"></span>
+          <span class="option-text">As olheiras e o ar de cansaço</span>
+        </button>
+        <button class="option" data-value="labios">
+          <span class="option-icon"></span>
+          <span class="option-text">Os lábios, que gostaria que tivessem mais volume</span>
+        </button>
+        <button class="option" data-value="pele">
+          <span class="option-icon"></span>
+          <span class="option-text">A textura e o viço da pele</span>
+        </button>
+      </div>
+      <footer>
+        <button class="primary-btn" data-next disabled>Continuar</button>
+      </footer>
+    </section>
+
+    <!-- Screen 2 -->
+    <section class="screen" data-screen="q2">
+      <div class="eyebrow"><span class="eyebrow-dot"></span>Pergunta 2 de 5</div>
+      <h2 class="question-title">Se uma coisa mudasse hoje, o que traria mais confiança para você?</h2>
+      <p class="question-subtitle">Pense em como você gostaria de se sentir ao se ver no espelho.</p>
+      <div class="options" data-question="q2">
+        <button class="option" data-value="olhar-jovem">
+          <span class="option-icon"></span>
+          <span class="option-text">Um olhar mais descansado e jovem</span>
+        </button>
+        <button class="option" data-value="rosto-definido">
+          <span class="option-icon"></span>
+          <span class="option-text">Um rosto mais definido e harmônico</span>
+        </button>
+        <button class="option" data-value="pele-viço">
+          <span class="option-icon"></span>
+          <span class="option-text">Uma pele com mais viço e firmeza</span>
+        </button>
+        <button class="option" data-value="autoestima-geral">
+          <span class="option-icon"></span>
+          <span class="option-text">Simplesmente me sentir mais eu mesma</span>
+        </button>
+      </div>
+      <footer>
+        <button class="primary-btn" data-next disabled>Continuar</button>
+      </footer>
+    </section>
+
+    <!-- Screen 3 -->
+    <section class="screen" data-screen="q3">
+      <div class="eyebrow"><span class="eyebrow-dot"></span>Pergunta 3 de 5</div>
+      <h2 class="question-title">Como você costuma se sentir ao ver fotos suas recentes?</h2>
+      <p class="question-subtitle">Não existe resposta certa, só queremos entender você.</p>
+      <div class="options" data-question="q3">
+        <button class="option" data-value="insegura">
+          <span class="option-icon"></span>
+          <span class="option-text">Um pouco insegura, evito me ver muito</span>
+        </button>
+        <button class="option" data-value="cansada">
+          <span class="option-icon"></span>
+          <span class="option-text">Acho que pareço mais cansada do que me sinto</span>
+        </button>
+        <button class="option" data-value="tranquila">
+          <span class="option-icon"></span>
+          <span class="option-text">Tranquila, mas sei que poderia melhorar algo</span>
+        </button>
+        <button class="option" data-value="quero-natural">
+          <span class="option-icon"></span>
+          <span class="option-text">Gostaria de um resultado mais natural em geral</span>
+        </button>
+      </div>
+      <footer>
+        <button class="primary-btn" data-next disabled>Continuar</button>
+      </footer>
+    </section>
+
+    <!-- Screen 4 -->
+    <section class="screen" data-screen="q4">
+      <div class="eyebrow"><span class="eyebrow-dot"></span>Pergunta 4 de 5</div>
+      <h2 class="question-title">O que mais te faz hesitar em buscar ajuda até hoje?</h2>
+      <p class="question-subtitle">Entender isso nos ajuda a te orientar melhor.</p>
+      <div class="options" data-question="q4">
+        <button class="option" data-value="medo-artificial">
+          <span class="option-icon"></span>
+          <span class="option-text">Medo de um resultado artificial</span>
+        </button>
+        <button class="option" data-value="nao-sei-comecar">
+          <span class="option-icon"></span>
+          <span class="option-text">Não sei por onde começar</span>
+        </button>
+        <button class="option" data-value="falta-confianca">
+          <span class="option-icon"></span>
+          <span class="option-text">Ainda não encontrei um profissional de confiança</span>
+        </button>
+        <button class="option" data-value="falta-tempo">
+          <span class="option-icon"></span>
+          <span class="option-text">Falta de tempo para me cuidar</span>
+        </button>
+      </div>
+      <footer>
+        <button class="primary-btn" data-next disabled>Continuar</button>
+      </footer>
+    </section>
+
+    <!-- Screen 5 -->
+    <section class="screen" data-screen="q5">
+      <div class="eyebrow"><span class="eyebrow-dot"></span>Pergunta 5 de 5</div>
+      <h2 class="question-title">E se isso mudasse, como você se sentiria?</h2>
+      <p class="question-subtitle">Última pergunta, prometemos.</p>
+      <div class="options" data-question="q5">
+        <button class="option" data-value="mais-confiante">
+          <span class="option-icon"></span>
+          <span class="option-text">Mais confiante no dia a dia</span>
+        </button>
+        <button class="option" data-value="mais-jovem">
+          <span class="option-icon"></span>
+          <span class="option-text">Mais jovem e descansada</span>
+        </button>
+        <button class="option" data-value="mais-leve">
+          <span class="option-icon"></span>
+          <span class="option-text">Mais leve, sem pensar tanto nisso</span>
+        </button>
+        <button class="option" data-value="mais-eu">
+          <span class="option-icon"></span>
+          <span class="option-text">Mais parecida com a versão que me lembro de mim</span>
+        </button>
+      </div>
+      <footer>
+        <button class="primary-btn" data-next disabled>Ver meu resultado</button>
+      </footer>
+    </section>
+
+    <!-- Loading screen -->
+    <section class="screen loading-screen" data-screen="loading">
+      <div class="spinner"></div>
+      <p class="loading-title">Preparando sua orientação personalizada</p>
+      <p class="loading-sub">Estamos juntando suas respostas para te dar um caminho mais claro.</p>
+    </section>
+
+    <!-- Result screen -->
+    <section class="screen" data-screen="result">
+      <div class="result-badge">
+        <svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="#9c3f37" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s-7.5-4.6-9.6-9.1C.7 8.4 2.6 5 6 5c2 0 3.4 1.1 4 2.1.6-1 2-2.1 4-2.1 3.4 0 5.3 3.4 3.6 6.9C19.5 16.4 12 21 12 21z"/></svg>
+      </div>
+      <h2 class="result-title" id="resultTitle">Isso realmente pode ser para você</h2>
+      <p class="result-sub" id="resultSub">Pelas suas respostas, existe um caminho simples e individual para te ajudar a chegar onde você quer.</p>
+
+      <div class="result-card">
+        <div class="result-row">
+          <span class="result-row-icon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>
+          </span>
+          <span class="result-row-text">Avaliação individual, sem julgamento, para entender o que faz sentido para você.</span>
+        </div>
+        <div class="result-row">
+          <span class="result-row-icon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>
+          </span>
+          <span class="result-row-text">Conversa próxima e humana, sem pressa e sem compromisso.</span>
+        </div>
+        <div class="result-row">
+          <span class="result-row-icon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>
+          </span>
+          <span class="result-row-text">Orientação profissional para decidir com calma o próximo passo.</span>
+        </div>
+      </div>
+
+      <footer>
+        <a href="#" id="whatsappBtn" class="primary-btn" target="_blank" rel="noopener noreferrer" style="text-decoration:none; display:flex;">Quero conversar sobre isso</a>
+        <p class="result-disclaimer">O envio das respostas é opcional e serve apenas para te orientar melhor na conversa com a clínica.</p>
+      </footer>
+    </section>
+
+  </main>
+</div>
+
+<script>
+(function () {
+  var screens = ['welcome','q1','q2','q3','q4','q5','loading','result'];
+  var questionScreens = ['q1','q2','q3','q4','q5'];
+  var current = 0;
+  var answers = {};
+
+  var progressWrap = document.getElementById('progressWrap');
+  var progressFill = document.getElementById('progressFill');
+  var backBtn = document.getElementById('backBtn');
+  var startBtn = document.getElementById('startBtn');
+  var whatsappBtn = document.getElementById('whatsappBtn');
+  var resultTitle = document.getElementById('resultTitle');
+  var resultSub = document.getElementById('resultSub');
+
+  function screenEl(name) {
+    return document.querySelector('[data-screen="' + name + '"]');
+  }
+
+  function trackContact(buttonName) {
+    gtag('event', 'conversion', {
+      send_to: 'AW-11520068730/2dJwCIXhi4kbEPqYmfUq',
+      value: 1.0,
+      currency: 'BRL',
+      event_label: buttonName
+    });
+    fbq('track', 'Lead', { content_name: buttonName, source: 'quiz' });
+    fbq('track', 'Contact', { content_name: buttonName, source: 'quiz' });
+  }
+
+  function showScreen(index) {
+    screens.forEach(function (name, i) {
+      var el = screenEl(name);
+      if (!el) return;
+      el.classList.toggle('active', i === index);
+    });
+
+    var name = screens[index];
+    var qIndex = questionScreens.indexOf(name);
+    if (qIndex >= 0) {
+      progressWrap.style.display = 'flex';
+      progressFill.style.width = (((qIndex) / questionScreens.length) * 100) + '%';
+      backBtn.classList.toggle('visible', index > 0);
+    } else if (name === 'welcome') {
+      progressWrap.style.display = 'none';
+    } else {
+      progressWrap.style.display = 'flex';
+      progressFill.style.width = '100%';
+      backBtn.classList.remove('visible');
+    }
+  }
+
+  function goTo(index) {
+    current = index;
+    showScreen(current);
+    if (screens[current] === 'loading') {
+      fbq('trackCustom', 'QuizCompleto', answers);
+      window.setTimeout(function () {
+        buildResult();
+        goTo(screens.indexOf('result'));
+      }, 1400);
+    }
+  }
+
+  startBtn.addEventListener('click', function () {
+    fbq('trackCustom', 'QuizIniciado');
+    goTo(1);
+  });
+
+  backBtn.addEventListener('click', function () {
+    if (current > 1) goTo(current - 1);
+    else goTo(0);
+  });
+
+  document.querySelectorAll('.options').forEach(function (group) {
+    var qName = group.getAttribute('data-question');
+    group.querySelectorAll('.option').forEach(function (opt) {
+      opt.addEventListener('click', function () {
+        group.querySelectorAll('.option').forEach(function (o) { o.classList.remove('selected'); });
+        opt.classList.add('selected');
+        answers[qName] = opt.getAttribute('data-value');
+        var footer = group.closest('.screen').querySelector('[data-next]');
+        footer.disabled = false;
+      });
+    });
+  });
+
+  document.querySelectorAll('[data-next]').forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      var nextIndex = current + 1;
+      goTo(nextIndex);
+    });
+  });
+
+  function buildResult() {
+    var focusMap = {
+      testa: 'a testa e as linhas de expressão',
+      contorno: 'o contorno do rosto',
+      olheiras: 'as olheiras e o cansaço no olhar',
+      labios: 'os lábios',
+      pele: 'a textura da pele'
+    };
+    var desireMap = {
+      'mais-confiante': 'se sentir mais confiante no dia a dia',
+      'mais-jovem': 'se sentir mais jovem e descansada',
+      'mais-leve': 'se sentir mais leve com relação a isso',
+      'mais-eu': 'se sentir mais parecida com a versão que você lembra de si mesma'
+    };
+
+    var focusText = focusMap[answers.q1] || 'o que mais te incomoda hoje';
+    var desireText = desireMap[answers.q5] || 'se sentir melhor com você mesma';
+
+    resultTitle.textContent = 'Isso realmente pode ser para você';
+    resultSub.textContent = 'Você mencionou ' + focusText + ' e o desejo de ' + desireText + '. Um caminho simples e individual pode te ajudar a chegar aí, com calma e sem pressa.';
+
+    var message = 'Olá! Fiz o quiz da BP Clinic no Google/YouTube e gostaria de conversar sobre uma avaliação. ' +
+      'O que mais me chamou atenção foi ' + focusText + ', e meu objetivo é ' + desireText + '.';
+
+    whatsappBtn.href = 'https://wa.me/5521973725889?text=' + encodeURIComponent(message);
+    whatsappBtn.addEventListener('click', function () {
+      trackContact('Quiz - Resultado Final');
+    });
+  }
+
+  showScreen(0);
+})();
+</script>
+</body>
+</html>
